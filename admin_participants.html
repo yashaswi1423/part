@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Participant Registrations | Smart Horizon Hackathon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2b2d73;
+            --primary-600: #3b3e8c;
+            --primary-700: #1f225e;
+            --accent: #c12d6b;
+            --bg: #ffffff;
+            --text: #1f1f1f;
+            --muted: #6b6b6b;
+            --alt: #f6f7fb;
+            --card: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.08);
+            --radius: 14px;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+            background: var(--alt);
+            line-height: 1.6;
+        }
+
+        .admin-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .admin-header p {
+            margin: 0.5rem 0 0;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .participants-section {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .refresh-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .participants-list {
+            padding: 0;
+        }
+
+        .participant-card {
+            border-bottom: 1px solid #eee;
+            padding: 1.5rem 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .participant-card:hover {
+            background: var(--alt);
+        }
+
+        .participant-card:last-child {
+            border-bottom: none;
+        }
+
+        .team-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .domain-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .team-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-group h4 {
+            margin: 0 0 0.5rem;
+            color: var(--primary-700);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-group p {
+            margin: 0;
+            color: var(--text);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .member-card {
+            background: var(--alt);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: var(--primary-700);
+            margin-bottom: 0.3rem;
+        }
+
+        .member-details {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--muted);
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem 2rem;
+            border-left: 4px solid var(--danger);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--muted);
+        }
+
+        .empty-state h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .admin-header {
+                padding: 1rem;
+            }
+
+            .section-header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .participant-card {
+                padding: 1rem;
+            }
+
+            .team-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .team-details {
+                grid-template-columns: 1fr;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <h1>🎯 Admin Panel - Participant Registrations</h1>
+        <p>Smart Horizon 48-Hour International Hackathon 2026</p>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="total-teams">0</div>
+                <div class="stat-label">Total Teams</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-participants">0</div>
+                <div class="stat-label">Total Participants</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="ai-ml-teams">0</div>
+                <div class="stat-label">AI/ML Teams</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="healthcare-teams">0</div>
+                <div class="stat-label">Healthcare Teams</div>
+            </div>
+        </div>
+
+        <div class="participants-section">
+            <div class="section-header">
+                <h2>📋 Registered Teams</h2>
+                <button class="refresh-btn" onclick="loadParticipants()">🔄 Refresh</button>
+            </div>
+            <div class="participants-list" id="participants-list">
+                <div class="loading">Loading participant data...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for demonstration - replace with actual database calls
+        let participants = [];
+
+        async function loadParticipants() {
+            // Show loading state
+            document.getElementById('participants-list').innerHTML = '<div class="loading">Loading participant data...</div>';
+            
+            try {
+                const response = await fetch('api_participants.php');
+                const result = await response.json();
+                
+                if (result.success) {
+                    participants = result.data.map(p => ({
+                        teamName: p.team_name,
+                        domain: p.domain,
+                        leadName: p.lead_name,
+                        leadUsn: p.lead_usn,
+                        leadGender: p.lead_gender,
+                        leadMobile: p.lead_mobile,
+                        leadEmail: p.lead_email,
+                        collegeName: p.college_name,
+                        member2Name: p.member2_name,
+                        member2Usn: p.member2_usn,
+                        member2Gender: p.member2_gender,
+                        member2Mobile: p.member2_mobile,
+                        member3Name: p.member3_name,
+                        member3Usn: p.member3_usn,
+                        member3Gender: p.member3_gender,
+                        member3Mobile: p.member3_mobile,
+                        member4Name: p.member4_name,
+                        member4Usn: p.member4_usn,
+                        member4Gender: p.member4_gender,
+                        member4Mobile: p.member4_mobile,
+                        member5Name: p.member5_name,
+                        member5Usn: p.member5_usn,
+                        member5Gender: p.member5_gender,
+                        accommodation: p.accommodation,
+                        registrationDate: p.registration_date
+                    }));
+                    
+                    displayParticipants();
+                    updateStats();
+                } else {
+                    throw new Error(result.error || 'Failed to load participants');
+                }
+            } catch (error) {
+                console.error('Error loading participants:', error);
+                document.getElementById('participants-list').innerHTML = `
+                    <div class="error">
+                        <h3>Error Loading Data</h3>
+                        <p>Could not load participant data: ${error.message}</p>
+                        <p><strong>Note:</strong> Make sure you're running this on a PHP server (like XAMPP) for the database functionality to work.</p>
+                        <button class="refresh-btn" onclick="loadParticipants()" style="margin-top: 1rem;">Try Again</button>
+                    </div>
+                `;
+            }
+        }
+
+        function displayParticipants() {
+            const container = document.getElementById('participants-list');
+            
+            if (participants.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No Registrations Yet</h3>
+                        <p>Participant registrations will appear here once teams start registering.</p>
+                        <p><strong>Note:</strong> This is a demo admin panel. To connect to a real database, you'll need to implement the backend API.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = participants.map(team => `
+                <div class="participant-card">
+                    <div class="team-header">
+                        <h3 class="team-name">${escapeHtml(team.teamName)}</h3>
+                        <span class="domain-badge">${getDomainName(team.domain)}</span>
+                    </div>
+                    
+                    <div class="team-details">
+                        <div class="detail-group">
+                            <h4>Team Lead</h4>
+                            <p><strong>${escapeHtml(team.leadName)}</strong></p>
+                            <p>📧 ${escapeHtml(team.leadEmail)}</p>
+                            <p>📱 ${escapeHtml(team.leadMobile)}</p>
+                        </div>
+                        <div class="detail-group">
+                            <h4>College</h4>
+                            <p>${escapeHtml(team.collegeName)}</p>
+                        </div>
+                        <div class="detail-group">
+                            <h4>Accommodation</h4>
+                            <p>${team.accommodation === 'yes' ? '✅ Required' : '❌ Not Required'}</p>
+                        </div>
+                        <div class="detail-group">
+                            <h4>Registration Date</h4>
+                            <p>${new Date(team.registrationDate).toLocaleDateString()}</p>
+                        </div>
+                    </div>
+
+                    <div class="members-grid">
+                        ${generateMemberCards(team)}
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+        }
+
+        function generateMemberCards(team) {
+            const members = [];
+            
+            // Team Lead
+            members.push({
+                name: team.leadName,
+                usn: team.leadUsn,
+                gender: team.leadGender,
+                mobile: team.leadMobile,
+                role: 'Team Lead'
+            });
+
+            // Other members
+            for (let i = 2; i <= 5; i++) {
+                const name = team[`member${i}Name`];
+                if (name) {
+                    members.push({
+                        name: name,
+                        usn: team[`member${i}Usn`],
+                        gender: team[`member${i}Gender`],
+                        mobile: team[`member${i}Mobile`] || 'N/A',
+                        role: `Member ${i}`
+                    });
+                }
+            }
+
+            return members.map(member => `
+                <div class="member-card">
+                    <div class="member-name">${escapeHtml(member.name)} ${member.role === 'Team Lead' ? '👑' : ''}</div>
+                    <div class="member-details">
+                        <div><strong>USN:</strong> ${escapeHtml(member.usn)}</div>
+                        <div><strong>Gender:</strong> ${member.gender === 'male' ? '👨' : '👩'} ${member.gender}</div>
+                        ${member.mobile !== 'N/A' ? `<div><strong>Mobile:</strong> ${escapeHtml(member.mobile)}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateStats() {
+            const totalTeams = participants.length;
+            const totalParticipants = participants.reduce((sum, team) => {
+                let count = 1; // Team lead
+                for (let i = 2; i <= 5; i++) {
+                    if (team[`member${i}Name`]) count++;
+                }
+                return sum + count;
+            }, 0);
+
+            const aiMlTeams = participants.filter(team => team.domain === 'ai-ml').length;
+            const healthcareTeams = participants.filter(team => team.domain === 'healthcare').length;
+
+            document.getElementById('total-teams').textContent = totalTeams;
+            document.getElementById('total-participants').textContent = totalParticipants;
+            document.getElementById('ai-ml-teams').textContent = aiMlTeams;
+            document.getElementById('healthcare-teams').textContent = healthcareTeams;
+        }
+
+        function getDomainName(domain) {
+            const domains = {
+                'ai-ml': 'AI/ML',
+                'healthcare': 'Healthcare Tech',
+                'other': 'Other'
+            };
+            return domains[domain] || domain;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load participants on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadParticipants();
+        });
+    </script>
+</body>
+</html>

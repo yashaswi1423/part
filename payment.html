@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Smart Horizon Hackathon 2026 | New Horizon College of Engineering</title>
+    <meta name="description" content="Complete payment for Smart Horizon Hackathon 2026 registration" />
+    <meta name="theme-color" content="#2b2d73" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="site-header" role="banner" aria-label="College branding">
+        <div class="header-inner">
+            <div class="logo left">
+                <img src="Silver_Jubille_Logo-removebg-preview.png" alt="Silver Jubilee — 25 years logo" />
+            </div>
+            <div class="logo center">
+                <img src="NHCE Blue.png" alt="New Horizon College of Engineering logo" />
+            </div>
+            <div class="logo right">
+                <img src="hi.png" alt="Institution's Innovation Council logo" />
+            </div>
+        </div>
+    </header>
+
+    <main class="section payment-page" role="main">
+        <div class="container">
+            <div class="payment-header">
+                <div class="hero-badges">
+                    <span class="chip accent">SMART HORIZON HACKATHON 2026</span>
+                </div>
+                <h1>Complete Your Payment</h1>
+                <p class="subtitle">Secure your team registration</p>
+            </div>
+
+            <!-- Registration Summary -->
+            <div class="payment-summary">
+                <h3>Registration Summary</h3>
+                <div class="summary-card">
+                    <div class="summary-row">
+                        <span class="label">Team Name:</span>
+                        <span class="value" id="summaryTeamName">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Theme:</span>
+                        <span class="value" id="summaryTheme">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Team Lead:</span>
+                        <span class="value" id="summaryTeamLead">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">College:</span>
+                        <span class="value" id="summaryCollege">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Country:</span>
+                        <span class="value" id="summaryCountry">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <h3>Payment Details</h3>
+                <div class="payment-card">
+                    <div class="payment-row">
+                        <span class="label">Registration Fee:</span>
+                        <span class="value" id="registrationFee">₹5,000</span>
+                    </div>
+                    <div class="payment-row total">
+                        <span class="label">Total Amount:</span>
+                        <span class="value" id="totalAmount">₹5,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Form -->
+            <div class="payment-form-container">
+                <h3>Payment Information</h3>
+                <form id="paymentForm" class="payment-form">
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method <span class="required">*</span></label>
+                        <select id="paymentMethod" name="paymentMethod" required>
+                            <option value="">Select Payment Method</option>
+                            <option value="upi">UPI Payment</option>
+                            <option value="card">Credit/Debit Card</option>
+                            <option value="netbanking">Net Banking</option>
+                        </select>
+                    </div>
+
+                    <!-- UPI Payment -->
+                    <div id="upiPayment" class="payment-method-section" style="display: none;">
+                        <div class="form-group">
+                            <label for="upiId">UPI ID <span class="required">*</span></label>
+                            <input type="text" id="upiId" name="upiId" placeholder="yourname@upi" />
+                        </div>
+                    </div>
+
+                    <!-- Card Payment -->
+                    <div id="cardPayment" class="payment-method-section" style="display: none;">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number <span class="required">*</span></label>
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date <span class="required">*</span></label>
+                                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV <span class="required">*</span></label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardholderName">Cardholder Name <span class="required">*</span></label>
+                            <input type="text" id="cardholderName" name="cardholderName" placeholder="Name on Card" />
+                        </div>
+                    </div>
+
+                    <!-- Net Banking -->
+                    <div id="netbankingPayment" class="payment-method-section" style="display: none;">
+                        <div class="form-group">
+                            <label for="bankName">Select Bank <span class="required">*</span></label>
+                            <select id="bankName" name="bankName">
+                                <option value="">Select Your Bank</option>
+                                <option value="sbi">State Bank of India</option>
+                                <option value="hdfc">HDFC Bank</option>
+                                <option value="icici">ICICI Bank</option>
+                                <option value="axis">Axis Bank</option>
+                                <option value="kotak">Kotak Mahindra Bank</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="payment-info-box">
+                        <div class="warning-icon">🔒</div>
+                        <div class="payment-info-content">
+                            <h4>Secure Payment</h4>
+                            <ul class="payment-notes">
+                                <li>Your payment information is encrypted and secure</li>
+                                <li>Payment must be made in INR (Indian Rupees) only</li>
+                                <li>Registration fees are Non-refundable under any circumstances</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn outline" onclick="goBack()">Back to Registration</button>
+                        <button type="submit" class="btn primary" id="payButton">
+                            <span class="payment-icon">💳</span>
+                            Pay Now - <span id="payAmount">₹5,000</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Payment Processing -->
+            <div id="paymentProcessing" class="payment-processing" style="display: none;">
+                <div class="processing-card">
+                    <div class="processing-spinner"></div>
+                    <h3>Processing Payment...</h3>
+                    <p>Please wait while we process your payment. Do not close this window.</p>
+                </div>
+            </div>
+
+            <!-- Payment Success -->
+            <div id="paymentSuccess" class="payment-success" style="display: none;">
+                <div class="success-card">
+                    <div class="success-icon">✅</div>
+                    <h3>Payment Successful!</h3>
+                    <p>Your payment has been processed successfully.</p>
+                    <div class="transaction-details">
+                        <div class="detail-row">
+                            <span class="label">Transaction ID:</span>
+                            <span class="value" id="transactionId">TXN123456789</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Amount Paid:</span>
+                            <span class="value" id="paidAmount">₹5,000</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Payment Method:</span>
+                            <span class="value" id="paymentMethodUsed">UPI</span>
+                        </div>
+                    </div>
+                    <p class="success-message">Your registration is now being processed...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>&copy; 2026 New Horizon College of Engineering — Smart Horizon Hackathon 2026</p>
+        </div>
+    </footer>
+
+    <script src="payment.js"></script>
+</body>
+</html>

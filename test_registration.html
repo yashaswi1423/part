@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Registration API</title>
+</head>
+<body>
+    <h1>Test Registration API</h1>
+    <button onclick="testRegistration()">Test Registration</button>
+    <button onclick="checkData()">Check Data</button>
+    <div id="result"></div>
+
+    <script>
+        async function testRegistration() {
+            const testData = {
+                domain: "ai-ml",
+                teamName: "Test Team",
+                leadUsn: "TEST001",
+                leadName: "Test Leader",
+                leadGender: "male",
+                leadMobile: "9999999999",
+                leadEmail: "test@example.com",
+                collegeName: "Test College",
+                member2Usn: "TEST002",
+                member2Name: "Test Member 2",
+                member2Gender: "female",
+                member2Mobile: "9999999998",
+                member3Usn: "TEST003",
+                member3Name: "Test Member 3",
+                member3Gender: "male",
+                member3Mobile: "9999999997",
+                member4Usn: "TEST004",
+                member4Name: "Test Member 4",
+                member4Gender: "female",
+                member4Mobile: "9999999996",
+                accommodation: "yes"
+            };
+
+            try {
+                const response = await fetch('api_participants.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                const result = await response.json();
+                document.getElementById('result').innerHTML = '<h3>Registration Result:</h3><pre>' + JSON.stringify(result, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<h3>Error:</h3><p>' + error.message + '</p>';
+            }
+        }
+
+        async function checkData() {
+            try {
+                const response = await fetch('api_participants.php');
+                const result = await response.json();
+                document.getElementById('result').innerHTML = '<h3>Current Data:</h3><pre>' + JSON.stringify(result, null, 2) + '</pre>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<h3>Error:</h3><p>' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

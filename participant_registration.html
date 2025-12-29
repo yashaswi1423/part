@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Participant Registration - Silver Spectrum TechFest 2025 | New Horizon College of Engineering</title>
+  <meta name="description" content="Register your team for Silver Spectrum TechFest 2025 - 48-hour hackathon at NHCE, Bangalore." />
+  <meta name="theme-color" content="#2b2d73" />
+  <meta name="keywords" content="hackathon registration, NHCE, AI, machine learning, cybersecurity, IoT, team registration" />
+  <meta name="author" content="New Horizon College of Engineering" />
+  <meta name="robots" content="index, follow" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="participant_style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#registration-form">Skip to registration form</a>
+
+  <header class="site-header" role="banner" aria-label="College branding">
+    <div class="header-inner">
+      <div class="logo left">
+        <img src="Silver_Jubille_Logo-removebg-preview.png" alt="Silver Jubilee — 25 years logo" />
+      </div>
+      <div class="logo center">
+        <img src="NHCE Blue.png" alt="New Horizon College of Engineering logo" />
+      </div>
+      <div class="logo right">
+        <img src="hi.png" alt="Institution's Innovation Council logo" />
+      </div>
+    </div>
+
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <ul id="nav-menu" class="nav-menu">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="index.html#about">About NHCE</a></li>
+        <li><a class="nav-link" href="index.html#hackathon">Hackathon Details</a></li>
+        <li><a class="nav-link" href="index.html#domains">Domains</a></li>
+        <li><a class="nav-link" href="index.html#advisory-committee">Advisory Committee</a></li>
+        <li><a class="nav-link" href="index.html#prizes">Prizes & Registration</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="registration-form" class="section registration-page" role="main">
+    <div class="container">
+      <div class="registration-header">
+        <div class="hero-badges">
+          <span class="chip accent">SILVER SPECTRUM TECHFEST 2025</span>
+        </div>
+        <h1>Registration for participants</h1>
+        <p class="subtitle">Silver Spectrum TechFest 2025</p>
+        
+        <div class="note-box">
+          <span class="note-label">REQUIRED</span>
+          <p>Registration Details</p>
+        </div>
+        
+        <div class="domain-selection-info">
+          <div class="warning-note">
+            <p>Problem statements will be announced shortly. Domain selection will be available during the registration process.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <form id="participantForm" class="ps-form" novalidate>
+          <!-- Theme Selection -->
+          <div class="form-section">
+            <div class="form-group">
+              <label for="domain">Select the Theme in which you want to Participate <span class="required">*</span></label>
+              <select id="domain" name="domain" required>
+                <option value="">Select your answer</option>
+                <option value="agriculture" data-count="0">Agriculture and Rural Development (0/100)</option>
+                <option value="healthtech" data-count="0">Health Tech (0/100)</option>
+                <option value="spacetech" data-count="0">SpaceTech (0/100)</option>
+                <option value="smartcity" data-count="0">Smart City, Vehicles and Automation (0/100)</option>
+                <option value="fintech" data-count="0">FinTech (0/100)</option>
+              </select>
+              <div class="theme-availability-info">
+                <p class="availability-note">Theme availability is updated in real-time. Full themes (100/100) cannot be selected.</p>
+                <button type="button" class="btn outline small" onclick="refreshThemeAvailability()">
+                  <span class="refresh-icon">🔄</span>
+                  Check Availability
+                </button>
+              </div>
+              <div class="error-message" id="domain-error"></div>
+            </div>
+          </div>
+
+          <!-- Team Information -->
+          <div class="form-section">
+            <h3>Team Information</h3>
+            
+            <div class="form-group">
+              <label for="teamName">Enter your Team Name <span class="required">*</span></label>
+              <input type="text" id="teamName" name="teamName" placeholder="Enter your answer" required />
+              <div class="error-message" id="teamName-error"></div>
+            </div>
+          </div>
+
+          <!-- Team Lead Details -->
+          <div class="form-section">
+            <h3>Team Lead Details</h3>
+            
+            <div class="form-group">
+              <label for="leadUsn">Enter University ID of Team Lead <span class="required">*</span></label>
+              <input type="text" id="leadUsn" name="leadUsn" placeholder="Enter your answer" required />
+              <div class="error-message" id="leadUsn-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="leadName">Enter Name of Team Lead <span class="required">*</span></label>
+              <input type="text" id="leadName" name="leadName" placeholder="Enter your answer" required />
+              <div class="error-message" id="leadName-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Gender of Team Lead <span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="leadGender" value="male" required />
+                  <span class="radio-custom"></span>
+                  Male
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="leadGender" value="female" required />
+                  <span class="radio-custom"></span>
+                  Female
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="leadGender" value="transgender" required />
+                  <span class="radio-custom"></span>
+                  Transgender
+                </label>
+              </div>
+              <div class="error-message" id="leadGender-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="leadMobile">Enter Mobile Number of Team Lead <span class="required">*</span></label>
+              <input type="tel" id="leadMobile" name="leadMobile" placeholder="e.g., 9876543210" maxlength="10" pattern="[0-9]{10}" required />
+              <div class="form-hint">Enter 10-digit mobile number (numbers only)</div>
+              <div class="error-message" id="leadMobile-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="leadEmail">Enter Email ID of Team Lead <span class="required">*</span></label>
+              <input type="email" id="leadEmail" name="leadEmail" placeholder="Enter your answer" required />
+              <div class="error-message" id="leadEmail-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="collegeName">University/College Name <span class="required">*</span></label>
+              <input type="text" id="collegeName" name="collegeName" placeholder="Enter your answer" required />
+              <div class="error-message" id="collegeName-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="state">State <span class="required">*</span></label>
+              <input type="text" id="state" name="state" placeholder="Enter your state" required />
+              <div class="error-message" id="state-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country <span class="required">*</span></label>
+              <input type="text" id="country" name="country" placeholder="Enter your country" required />
+              <div class="error-message" id="country-error"></div>
+            </div>
+          </div>
+
+          <!-- Team Member 2 -->
+          <div class="form-section">
+            <h3>Team Member 2</h3>
+            
+            <div class="form-group">
+              <label for="member2Usn">Enter University ID of Team Member-2 <span class="required">*</span></label>
+              <input type="text" id="member2Usn" name="member2Usn" placeholder="Enter your answer" required />
+              <div class="error-message" id="member2Usn-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="member2Name">Enter Name of Team Member-2 <span class="required">*</span></label>
+              <input type="text" id="member2Name" name="member2Name" placeholder="Enter your answer" required />
+              <div class="error-message" id="member2Name-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Gender of Team Member-2 <span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="member2Gender" value="male" required />
+                  <span class="radio-custom"></span>
+                  Male
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member2Gender" value="female" required />
+                  <span class="radio-custom"></span>
+                  Female
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member2Gender" value="transgender" required />
+                  <span class="radio-custom"></span>
+                  Transgender
+                </label>
+              </div>
+              <div class="error-message" id="member2Gender-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="member2Mobile">Enter Mobile Number of Team Member-2 <span class="required">*</span></label>
+              <input type="tel" id="member2Mobile" name="member2Mobile" placeholder="e.g., 9876543210" maxlength="10" pattern="[0-9]{10}" required />
+              <div class="form-hint">Enter 10-digit mobile number (numbers only)</div>
+              <div class="error-message" id="member2Mobile-error"></div>
+            </div>
+          </div>
+
+          <!-- Team Member 3 -->
+          <div class="form-section">
+            <h3>Team Member 3</h3>
+            
+            <div class="form-group">
+              <label for="member3Usn">Enter University ID of Team Member-3 <span class="required">*</span></label>
+              <input type="text" id="member3Usn" name="member3Usn" placeholder="Enter your answer" required />
+              <div class="error-message" id="member3Usn-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="member3Name">Enter Name of Team Member-3 <span class="required">*</span></label>
+              <input type="text" id="member3Name" name="member3Name" placeholder="Enter your answer" required />
+              <div class="error-message" id="member3Name-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Gender of Team Member-3 <span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="member3Gender" value="male" required />
+                  <span class="radio-custom"></span>
+                  Male
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member3Gender" value="female" required />
+                  <span class="radio-custom"></span>
+                  Female
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member3Gender" value="transgender" required />
+                  <span class="radio-custom"></span>
+                  Transgender
+                </label>
+              </div>
+              <div class="error-message" id="member3Gender-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="member3Mobile">Enter Mobile Number of Team Member-3 <span class="required">*</span></label>
+              <input type="tel" id="member3Mobile" name="member3Mobile" placeholder="e.g., 9876543210" maxlength="10" pattern="[0-9]{10}" required />
+              <div class="form-hint">Enter 10-digit mobile number (numbers only)</div>
+              <div class="error-message" id="member3Mobile-error"></div>
+            </div>
+          </div>
+
+          <!-- Team Member 4 -->
+          <div class="form-section">
+            <h3>Team Member 4</h3>
+            
+            <div class="form-group">
+              <label for="member4Usn">Enter University ID of Team Member-4 <span class="required">*</span></label>
+              <input type="text" id="member4Usn" name="member4Usn" placeholder="Enter your answer" required />
+              <div class="error-message" id="member4Usn-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="member4Name">Enter Name of Team Member-4 <span class="required">*</span></label>
+              <input type="text" id="member4Name" name="member4Name" placeholder="Enter your answer" required />
+              <div class="error-message" id="member4Name-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Gender of Team Member-4 <span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="member4Gender" value="male" required />
+                  <span class="radio-custom"></span>
+                  Male
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member4Gender" value="female" required />
+                  <span class="radio-custom"></span>
+                  Female
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member4Gender" value="transgender" required />
+                  <span class="radio-custom"></span>
+                  Transgender
+                </label>
+              </div>
+              <div class="error-message" id="member4Gender-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="member4Mobile">Enter Mobile Number of Team Member-4 <span class="required">*</span></label>
+              <input type="tel" id="member4Mobile" name="member4Mobile" placeholder="e.g., 9876543210" maxlength="10" pattern="[0-9]{10}" required />
+              <div class="form-hint">Enter 10-digit mobile number (numbers only)</div>
+              <div class="error-message" id="member4Mobile-error"></div>
+            </div>
+          </div>
+
+          <!-- Team Member 5 (Optional) -->
+          <div class="form-section">
+            <h3>Team Member 5 (Optional)</h3>
+            
+            <div class="form-group">
+              <label for="member5Usn">Enter University ID of Team Member-5</label>
+              <input type="text" id="member5Usn" name="member5Usn" placeholder="Enter your answer" />
+              <div class="error-message" id="member5Usn-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="member5Name">Enter Name of Team Member-5</label>
+              <input type="text" id="member5Name" name="member5Name" placeholder="Enter your answer" />
+              <div class="error-message" id="member5Name-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label>Gender of Team Member-5</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="member5Gender" value="male" />
+                  <span class="radio-custom"></span>
+                  Male
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member5Gender" value="female" />
+                  <span class="radio-custom"></span>
+                  Female
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="member5Gender" value="transgender" />
+                  <span class="radio-custom"></span>
+                  Transgender
+                </label>
+              </div>
+              <div class="error-message" id="member5Gender-error"></div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Proceed to Payment</button>
+            <button type="reset" class="btn outline">Clear Form</button>
+          </div>
+        </form>
+
+        <div class="info-box">
+          <h3>Important Information</h3>
+          <p>This participation form is created and managed by New Horizon College of Engineering for the purpose of hackathon team registration. Participants should provide accurate information relevant to their team registration only.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>&copy; 2025 New Horizon College of Engineering — Silver Spectrum TechFest 2025</p>
+    </div>
+  </footer>
+
+  <script src="participant_script.js"></script>
+  <script>
+    // Check if user has accepted rules and regulations
+    window.addEventListener('DOMContentLoaded', function() {
+      const rulesAccepted = sessionStorage.getItem('rulesAccepted');
+      if (!rulesAccepted) {
+        alert('Please accept the rules and regulations first.');
+        window.location.href = 'rules_regulations.html';
+      }
+    });
+  </script>
+</body>
+</html>
